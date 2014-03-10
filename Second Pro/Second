@@ -1,0 +1,25 @@
+import sys
+print "Enter '1' to choose a Picture or Enter '2' to Exit"
+ans = raw_input("Enter Selection: ")
+
+if ans == 1:
+  looper = true
+else: 
+  looper = false
+  
+while looper == true:
+  file = pickAFile()
+  
+
+
+
+
+def viewPicture():
+  file = pickAFile()
+  pict = makePicture(file)
+  pixel = getPixel(pict, 0, 0)
+  pixels = getPixels(pict)
+  print "width is", getWidth(pict), "height is", getHeight(pict)
+  print "The value of the pixel at 0, 0 is: ", pixel
+  print "A different way to get the pixel at 0, 0 is: ", pixels[0]
+  explore(pict)
