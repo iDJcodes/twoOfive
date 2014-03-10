@@ -1,3 +1,5 @@
+# This is where the final code will be written in, might not have much but I am doing off coding in an other 
+# file(testing different methods of filtering
 import sys
 print "Enter '1' to choose a Picture or Enter '2' to Exit"
 ans = raw_input("Enter Selection: ")
@@ -23,3 +25,7 @@ def viewPicture():
   print "The value of the pixel at 0, 0 is: ", pixel
   print "A different way to get the pixel at 0, 0 is: ", pixels[0]
   explore(pict)
+ 
+ 
+def colorShift(ori):
+  
