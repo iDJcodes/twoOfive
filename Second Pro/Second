@@ -1,31 +1,110 @@
 # This is where the final code will be written in, might not have much but I am doing off coding in an other 
 # file(testing different methods of filtering
 import sys
-print "Enter '1' to choose a Picture or Enter '2' to Exit"
-ans = raw_input("Enter Selection: ")
+from random import randint 
 
-if ans == 1:
-  looper = true
-else: 
-  looper = false
-  
-while looper == true:
-  file = pickAFile()
-  
-
-
-
-
-def viewPicture():
-  file = pickAFile()
-  pict = makePicture(file)
+def viewPicture(oripic):
+  pict = makePicture(oripic)
   pixel = getPixel(pict, 0, 0)
   pixels = getPixels(pict)
   print "width is", getWidth(pict), "height is", getHeight(pict)
   print "The value of the pixel at 0, 0 is: ", pixel
   print "A different way to get the pixel at 0, 0 is: ", pixels[0]
   explore(pict)
- 
- 
-def colorShift(ori):
+
+def picNegative(oripic):
+  pict = makePicture(oripic)
+  for px in getPixels(pict):
+    red = getRed(px)
+    green = getGreen(px)
+    blue = getBlue(px)
+    negColor = makeColor(255 - red, 255 - green, 255 - blue)
+    setColor(px, negColor)
   
+  explore(pict)  
+  return pict
+
+def picGrey(oripic):
+  pict = makePicture(oripic)
+  for px in getPixels(pict):
+    neoRed = getRed(px)*0.333
+    neoGreen = getGreen(px)*0.333
+    neoBlue = getBlue(px)*0.333
+    lumi = neoRed+neoGreen+neoBlue
+    setColor(px, makeColor(lumi,lumi,lumi))
+   
+  explore(pict)
+  return pict
+
+def picPlay(oripic):
+  pict = makePicture(oripic)
+  for px in getPixels(pict):
+    playRed = getRed(px)
+    playGreen = getGreen(px)
+    playBlue = getBlue(px)
+    
+    randR = randint(0,1)
+    pRed = randR*playRed
+    
+    randG = randint(0,1)
+    pGreen = randG*playGreen
+    
+    randB = randint(0,1)
+    pBlue = randB*playBlue
+    
+    setColor(px, makeColor(pRed , pGreen, pBlue))
+  explore(pict)
+  return pict
+
+def picWb(oripic):
+  pict = makePicture(oripic)
+  for px in getPixels(pict):
+    fRed = getRed(px)
+    fGreen = getGreen(px)
+    fBlue = getBlue(px)
+    
+    if fRed == 255 and fGreen == 255 and fBlue == 255:
+      setColor(px, makeColor(0, 0, 0))
+    
+  explore(pict)
+  return pict
+  
+## The main body of the code above was functions
+picture_ori = pickAFile()
+  
+   
+print "1.Explore Picture"
+print "2.Negative"
+print "3.Greyscale"
+print "4.Play"
+print "5.White to Black"
+
+sel = raw_input("Enter Your selection: ")
+
+if sel == '1':
+  viewPicture(picture_ori)
+  
+elif sel == '2':
+  npic = picNegative(picture_ori)
+  writePictureTo(npic, r"C:\Users\Deejay\Documents\GitHub\twoOfive\Second Pro\nPict.jpg")
+elif sel == '3':
+  gpic = picGrey(picture_ori)
+  writePictureTo(gpic, r"C:\Users\Deejay\Documents\GitHub\twoOfive\Second Pro\gPict.jpg")
+elif sel == '4':
+  ppic = picPlay(picture_ori)
+  writePictureTo(ppic, r"C:\Users\Deejay\Documents\GitHub\twoOfive\Second Pro\pPict.jpg")
+elif sel == '5':
+  wbpic = picWb(picture_ori)
+  writePictureTo(wbpic, r"C:\Users\Deejay\Documents\GitHub\twoOfive\Second Pro\wbPict.jpg")
+
+else:
+  print "The selection You put is not apart of the choices!"
+
+
+  
+  
+
+
+
+
+ 
